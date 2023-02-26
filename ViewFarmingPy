@@ -1,0 +1,31 @@
+#The driver can be altered to use any browsing software. 
+
+import selenium
+from selenium import webdriver
+import time
+
+# Set up the Edge web driver
+driver = webdriver.Edge()
+
+# Open the webpage
+url = 'https://sordidarch.substack.com/p/a-growing-industry'
+driver.get(url)
+
+while True:
+    # Wait for the page to load
+    time.sleep(2)
+
+    # Scroll down the page
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    # Wait for 5 seconds
+    time.sleep(5)
+
+    # Close the page
+    driver.close()
+
+    # Reopen the page
+    driver = webdriver.Edge()
+    driver.get(url)
+
+# Close the web driver
