@@ -1,0 +1,28 @@
+''' a pranking script to infinitely iterate through a sender list to mess with your friends.'''
+
+import smtplib
+import time
+
+def send_email(sender_email, sender_password, recipient_email, message):
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, recipient_email, message)
+        print(f"Message sent from {sender_email} to {recipient_email}")
+        server.quit()
+    except Exception as e:
+        print(f"An error occurred while sending the email: {e}")
+
+if __name__ == "__main__":
+    sender_list = [
+        {"email": "sender1@example.com", "password": "password1"},
+        {"email": "sender2@example.com", "password": "password2"},
+        {"email": "sender3@example.com", "password": "password3"}
+    ]
+    recipient_email = "recipient@example.com" # replace with the recipient email address
+    message = "Hello, You Have Been Hacked." # replace with your message content
+    
+    for sender in sender_list:
+        send_email(sender["email"], sender["password"], recipient_email, message)
+        time.sleep(5)
